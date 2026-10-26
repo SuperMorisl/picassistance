@@ -23,8 +23,11 @@
 <link rel="stylesheet" href="../../css/style.css">
 <!-- chatbot -->
 <link rel="stylesheet" href="../../chatbot/chatbot.css">
+<!-- cookie consent -->
+<link rel="stylesheet" href="../../cookies/cookies.css">
 <script src="../../js/main.js" defer></script>
 <script src="../../chatbot/chatbot.js" defer></script>
+<script src="../../cookies/cookies.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -92,10 +95,15 @@
 <p>We may contact businesses and self-employed professionals using their publicly available business contact details to introduce our services. Legal basis: our legitimate interest (Article 6(1)(f) GDPR). You can object at any time, simply by replying or by writing to <a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a>: we will stop contacting you immediately.</p>
 
 <h2>The chatbot</h2>
-<p>The website’s chatbot runs entirely in your browser, using a FAQ built into the page. Your messages are not sent to any server, neither to us nor to anyone else, and nothing is stored: everything disappears when you close or reload the page.</p>
+<p>The website’s chatbot runs entirely in your browser, using a FAQ built into the page. Your messages are not sent to any server, neither to us nor to anyone else, and nothing is stored: everything disappears when you close or reload the page. Only a technical flag remembers, for the visit, that the welcome bubble was already shown (see “Cookies and local storage”).</p>
 
-<h2>Cookies and local storage</h2>
-<p>This website does not use audience measurement or advertising cookies, nor any analytics tool. It stores nothing on your device (no cookies, no local storage). That is why you are not shown a cookie banner.</p>
+<h2 id="cookies">Cookies and local storage</h2>
+<p>This website sets no advertising or tracking cookies. It only stores two technical items in your browser, strictly necessary for the site to work; they are not used for tracking and are never sent to us:</p>
+<ul>
+  <li><strong>Your cookie choice</strong>: local storage (<code>localStorage</code>), key <code>pic-cookie-consent</code>, kept for 6 months. It holds your choices, their date and a version number: if we ever add a new tool, you will be asked again.</li>
+  <li><strong>Whether the chat welcome message was shown</strong>: session storage (<code>sessionStorage</code>), key <code>pic-chat-teaser</code>, deleted when you close the tab. It stops the small “Got a question?” bubble from popping up on every page during your visit.</li>
+</ul>
+<p>The optional “Audience measurement” category offered in the banner is off by default and currently unused: no analytics tool is installed. If we add one, it will only be enabled with your consent and this page will be updated. You can change your choice at any time: <button type="button" class="pic-cookie-manage pic-cookie-manage-inline" data-pic-cookie-open>manage cookies</button> (also at the bottom of every page).</p>
 
 <h2>Recipients and processors</h2>
 <p>Your data is only accessible to the founders of PIC Assistance, to the extent necessary. We use the following service providers:</p>
@@ -156,6 +164,7 @@
       <ul class="footer-links">
         <li><a href="../../en/pages/mentions-legales.html">Legal notice</a></li>
         <li><a href="../../en/pages/confidentialite.html">Privacy policy</a></li>
+        <li><button type="button" class="pic-cookie-manage" data-pic-cookie-open>Manage cookies</button></li>
         <li><a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a></li>
       </ul>
     </div>

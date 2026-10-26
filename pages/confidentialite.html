@@ -23,8 +23,11 @@
 <link rel="stylesheet" href="../css/style.css">
 <!-- chatbot -->
 <link rel="stylesheet" href="../chatbot/chatbot.css">
+<!-- cookie consent -->
+<link rel="stylesheet" href="../cookies/cookies.css">
 <script src="../js/main.js" defer></script>
 <script src="../chatbot/chatbot.js" defer></script>
+<script src="../cookies/cookies.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Aller au contenu</a>
@@ -92,10 +95,15 @@
 <p>Nous pouvons contacter des entreprises et des indépendants en utilisant leurs coordonnées professionnelles publiques, pour leur présenter nos services. Base légale : notre intérêt légitime (article 6.1.f du RGPD). Vous pouvez vous y opposer à tout moment, par simple réponse ou à l’adresse <a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a> : nous arrêtons immédiatement de vous contacter.</p>
 
 <h2>Le chatbot</h2>
-<p>Le chatbot du site fonctionne entièrement dans votre navigateur, à partir d’une FAQ intégrée à la page. Vos messages ne sont envoyés à aucun serveur, ni à nous ni à un tiers, et rien n’est enregistré : tout disparaît lorsque vous fermez ou rechargez la page.</p>
+<p>Le chatbot du site fonctionne entièrement dans votre navigateur, à partir d’une FAQ intégrée à la page. Vos messages ne sont envoyés à aucun serveur, ni à nous ni à un tiers, et rien n’est enregistré : tout disparaît lorsque vous fermez ou rechargez la page. Seul un indicateur technique retient, le temps de la visite, que la bulle d’accueil a déjà été affichée (voir « Cookies et stockage local »).</p>
 
-<h2>Cookies et stockage local</h2>
-<p>Ce site n’utilise pas de cookies de mesure d’audience ni publicitaires, ni aucun outil de statistiques. Il n’enregistre rien sur votre appareil (pas de cookie, pas de stockage local). C’est pourquoi aucun bandeau de cookies ne vous est présenté.</p>
+<h2 id="cookies">Cookies et stockage local</h2>
+<p>Ce site ne dépose aucun cookie publicitaire ni de suivi. Il enregistre seulement deux informations techniques dans votre navigateur, strictement nécessaires à son fonctionnement ; elles ne servent à aucun suivi et ne nous sont jamais transmises :</p>
+<ul>
+  <li><strong>Votre choix de cookies</strong> : stockage local (<code>localStorage</code>), clé <code>pic-cookie-consent</code>, conservé 6 mois. Il contient vos choix, leur date et un numéro de version : si nous ajoutons un jour un nouvel outil, la question vous sera reposée.</li>
+  <li><strong>L’affichage du message d’accueil du chat</strong> : stockage de session (<code>sessionStorage</code>), clé <code>pic-chat-teaser</code>, effacé à la fermeture de l’onglet. Il évite que la petite bulle « Une question ? » réapparaisse à chaque page pendant votre visite.</li>
+</ul>
+<p>La catégorie facultative « Mesure d’audience » proposée dans le bandeau est désactivée par défaut et n’est pas utilisée pour le moment : aucun outil de statistiques n’est installé. Si nous en ajoutons un, il ne sera activé qu’avec votre accord et cette page sera mise à jour. Vous pouvez modifier votre choix à tout moment : <button type="button" class="pic-cookie-manage pic-cookie-manage-inline" data-pic-cookie-open>gérer les cookies</button> (également en bas de chaque page).</p>
 
 <h2>Destinataires et sous-traitants</h2>
 <p>Vos données sont accessibles uniquement aux fondateurs de PIC Assistance, dans la mesure nécessaire. Nous faisons appel aux prestataires suivants :</p>
@@ -156,6 +164,7 @@
       <ul class="footer-links">
         <li><a href="../pages/mentions-legales.html">Mentions légales</a></li>
         <li><a href="../pages/confidentialite.html">Politique de confidentialité</a></li>
+        <li><button type="button" class="pic-cookie-manage" data-pic-cookie-open>Gérer les cookies</button></li>
         <li><a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a></li>
       </ul>
     </div>

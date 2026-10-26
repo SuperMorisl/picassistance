@@ -23,8 +23,11 @@
 <link rel="stylesheet" href="../../css/style.css">
 <!-- chatbot -->
 <link rel="stylesheet" href="../../chatbot/chatbot.css">
+<!-- cookie consent -->
+<link rel="stylesheet" href="../../cookies/cookies.css">
 <script src="../../js/main.js" defer></script>
 <script src="../../chatbot/chatbot.js" defer></script>
+<script src="../../cookies/cookies.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Naar de inhoud</a>
@@ -92,10 +95,15 @@
 <p>We kunnen ondernemingen en zelfstandigen contacteren via hun openbare professionele contactgegevens om onze diensten voor te stellen. Rechtsgrond: ons gerechtvaardigd belang (artikel 6.1.f AVG). U kunt zich daar op elk moment tegen verzetten, gewoon door te antwoorden of te schrijven naar <a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a>: we stoppen dan onmiddellijk met u te contacteren.</p>
 
 <h2>De chatbot</h2>
-<p>De chatbot van de website werkt volledig in uw browser, op basis van een FAQ die in de pagina is ingebouwd. Uw berichten worden naar geen enkele server gestuurd, niet naar ons en niet naar derden, en er wordt niets bewaard: alles verdwijnt wanneer u de pagina sluit of herlaadt.</p>
+<p>De chatbot van de website werkt volledig in uw browser, op basis van een FAQ die in de pagina is ingebouwd. Uw berichten worden naar geen enkele server gestuurd, niet naar ons en niet naar derden, en er wordt niets bewaard: alles verdwijnt wanneer u de pagina sluit of herlaadt. Alleen een technische vlag onthoudt tijdens het bezoek dat het welkomstballonnetje al getoond werd (zie “Cookies en lokale opslag”).</p>
 
-<h2>Cookies en lokale opslag</h2>
-<p>Deze website gebruikt geen cookies voor bezoekersstatistieken of reclame, en ook geen statistiektools. Ze slaat niets op uw toestel op (geen cookies, geen lokale opslag). Daarom ziet u geen cookiebanner.</p>
+<h2 id="cookies">Cookies en lokale opslag</h2>
+<p>Deze website plaatst geen advertentie- of trackingcookies. Ze bewaart alleen twee technische gegevens in uw browser, die strikt noodzakelijk zijn voor de werking van de site; ze dienen niet om u te volgen en worden nooit naar ons verstuurd:</p>
+<ul>
+  <li><strong>Uw cookiekeuze</strong>: lokale opslag (<code>localStorage</code>), sleutel <code>pic-cookie-consent</code>, 6 maanden bewaard. Ze bevat uw keuzes, de datum en een versienummer: als we ooit een nieuwe tool toevoegen, vragen we het u opnieuw.</li>
+  <li><strong>Of het welkomstbericht van de chat al getoond werd</strong>: sessieopslag (<code>sessionStorage</code>), sleutel <code>pic-chat-teaser</code>, gewist wanneer u het tabblad sluit. Zo verschijnt het kleine “Een vraag?”-ballonnetje niet op elke pagina tijdens uw bezoek.</li>
+</ul>
+<p>De optionele categorie “Bezoekersmeting” in de banner staat standaard uit en wordt momenteel niet gebruikt: er is geen statistiektool geïnstalleerd. Voegen we er een toe, dan wordt die alleen met uw toestemming ingeschakeld en passen we deze pagina aan. U kunt uw keuze altijd wijzigen: <button type="button" class="pic-cookie-manage pic-cookie-manage-inline" data-pic-cookie-open>cookies beheren</button> (ook onderaan elke pagina).</p>
 
 <h2>Ontvangers en verwerkers</h2>
 <p>Uw gegevens zijn alleen toegankelijk voor de oprichters van PIC Assistance, voor zover nodig. We werken met de volgende dienstverleners:</p>
@@ -156,6 +164,7 @@
       <ul class="footer-links">
         <li><a href="../../nl/pages/mentions-legales.html">Juridische vermeldingen</a></li>
         <li><a href="../../nl/pages/confidentialite.html">Privacybeleid</a></li>
+        <li><button type="button" class="pic-cookie-manage" data-pic-cookie-open>Cookies beheren</button></li>
         <li><a href="mailto:contact.picassistance@gmail.com">contact.picassistance@gmail.com</a></li>
       </ul>
     </div>
