@@ -572,6 +572,7 @@ legend { font-weight: 650; padding: 0; margin-bottom: var(--space-3); }
 .plan-price { margin: 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
 .plan-amount { font-size: var(--step-display); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; font-variant-numeric: tabular-nums; }
 .plan-period { color: var(--muted); font-weight: 650; }
+.plan-setup { flex-basis: 100%; margin-top: var(--space-1); color: var(--muted); font-size: var(--step-small); font-weight: 600; }
 .plan-features { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
 .plan-features li { position: relative; padding-left: 1.6em; }
 .plan-features li::before {
