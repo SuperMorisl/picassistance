@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://picassistance.netlify.app/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/en/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/pages/tarifs.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/en/pages/tarifs.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/nl/pages/tarifs.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/tarifs.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/pages/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/contact.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/en/pages/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/contact.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/nl/pages/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/contact.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/pages/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/en/pages/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/nl/pages/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/mentions-legales.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/pages/confidentialite.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/en/pages/confidentialite.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+  </url>
+  <url>
+    <loc>https://picassistance.netlify.app/nl/pages/confidentialite.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://picassistance.netlify.app/en/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://picassistance.netlify.app/nl/pages/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://picassistance.netlify.app/pages/confidentialite.html"/>
+  </url>
+</urlset>

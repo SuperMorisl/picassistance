@@ -1,0 +1,22 @@
+# Static site, no build step: publish the repo root.
+[build]
+  publish = "."
+
+# Security headers (no CSP on purpose: pages use small inline style attributes;
+# add one later if needed, allowing formspree.io in connect-src/form-action).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# Internal docs and tooling files are not part of the public site.
+[[redirects]]
+  from = "/ARCHITECTURE.md"
+  to = "/404.html"
+  status = 404
+  force = true

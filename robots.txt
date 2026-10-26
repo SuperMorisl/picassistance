@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://picassistance.netlify.app/sitemap.xml
