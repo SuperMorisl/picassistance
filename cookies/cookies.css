@@ -41,6 +41,7 @@
 .pic-cookie-title:focus { outline: none; }
 .pic-cookie-title:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .pic-cookie-text { margin: 0 0 var(--space-4); color: var(--text); }
+.pic-cookie-short { display: none; }
 .pic-cookie-link { color: var(--brand-strong); font-weight: 650; text-underline-offset: 2px; }
 .pic-cookie-link:hover { color: var(--brand); }
 .pic-cookie-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
@@ -107,10 +108,18 @@ label.pic-cookie-cat-name { cursor: pointer; }
     left: max(12px, env(safe-area-inset-left));
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     width: calc(100vw - 12px - 84px); /* the bottom-right corner stays free for the chat launcher */
-    padding: var(--space-4);
-    font-size: 0.875rem;
+    padding: var(--space-3);
+    font-size: 0.8125rem;
+    line-height: 1.4;
   }
-  .pic-cookie-btn { flex: 1 1 calc(50% - var(--space-2)); min-width: 0; padding: 10px 8px; }
+  /* compact on phones: short text, small title, the three choices on one row */
+  .pic-cookie-long { display: none; }
+  .pic-cookie-short { display: inline; }
+  .pic-cookie-title { font-size: 0.9375rem; margin-bottom: var(--space-1); }
+  .pic-cookie-text { margin-bottom: var(--space-3); }
+  .pic-cookie-actions { flex-wrap: nowrap; gap: 6px; }
+  .pic-cookie-btn { flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 8px 4px; font-size: 0.8125rem; }
+  .pic-cookie-view#pic-cookie-prefs .pic-cookie-actions { flex-wrap: wrap; }
   .pic-cookie-cat { padding: var(--space-3); }
 }
 

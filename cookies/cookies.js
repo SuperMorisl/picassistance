@@ -28,6 +28,7 @@
   var T = {
     fr: {
       title: 'Cookies et vie privée',
+      short: 'Aucun cookie publicitaire ni de suivi. Mesure d’audience uniquement avec votre accord.',
       intro: 'Ce site n’utilise aucun cookie publicitaire ni de suivi. Avec votre accord, une mesure d’audience respectueuse pourra être activée plus tard pour améliorer le site. Vous pouvez changer d’avis à tout moment via « Gérer les cookies » en bas de page.',
       more: 'En savoir plus',
       accept: 'Accepter',
@@ -43,6 +44,7 @@
     },
     en: {
       title: 'Cookies and privacy',
+      short: 'No advertising or tracking cookies. Audience measurement only with your consent.',
       intro: 'This site uses no advertising or tracking cookies. With your consent, privacy-friendly audience measurement may be enabled later to improve the site. You can change your mind at any time via “Manage cookies” at the bottom of the page.',
       more: 'Learn more',
       accept: 'Accept',
@@ -58,6 +60,7 @@
     },
     nl: {
       title: 'Cookies en privacy',
+      short: 'Geen advertentie- of trackingcookies. Bezoekersmeting alleen met uw toestemming.',
       intro: 'Deze site gebruikt geen advertentie- of trackingcookies. Met uw toestemming kan later een privacyvriendelijke bezoekersmeting worden ingeschakeld om de site te verbeteren. U kunt uw keuze altijd wijzigen via “Cookies beheren” onderaan de pagina.',
       more: 'Meer info',
       accept: 'Accepteren',
@@ -182,7 +185,10 @@
     // Main view
     mainView = el('div', { 'class': 'pic-cookie-view', id: 'pic-cookie-main' });
     mainView.appendChild(el('h2', { id: 'pic-cookie-title', 'class': 'pic-cookie-title' }, t.title));
-    var p = el('p', { id: 'pic-cookie-desc', 'class': 'pic-cookie-text' }, t.intro + ' ');
+    // Full text on larger screens, a one-line summary on phones (CSS picks one).
+    var p = el('p', { id: 'pic-cookie-desc', 'class': 'pic-cookie-text' });
+    p.appendChild(el('span', { 'class': 'pic-cookie-long' }, t.intro + ' '));
+    p.appendChild(el('span', { 'class': 'pic-cookie-short' }, t.short + ' '));
     p.appendChild(el('a', { href: legalHref, 'class': 'pic-cookie-link' }, t.more));
     mainView.appendChild(p);
     var actions = el('div', { 'class': 'pic-cookie-actions' });
