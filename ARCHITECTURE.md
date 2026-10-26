@@ -11,7 +11,8 @@ pages/mentions-legales.html   FR placeholder: legal agent
 pages/confidentialite.html    FR placeholder: legal agent
 404.html                      uses ABSOLUTE paths (/css/...), served by Netlify at any depth
 en/  nl/                      same filenames: en/index.html, en/pages/tarifs.html, ...
-css/style.css                 shared, all languages
+css/style.css                 shared, all languages (design tokens at the top)
+fonts/                        Schibsted Grotesk variable woff2 (400–800, Latin subset, 41 KB) + OFL-SchibstedGrotesk.txt
 js/main.js                    shared, all languages (I18N object at the top)
 chatbot/chatbot.css|js        stubs: chatbot agent
 favicon.svg  robots.txt  sitemap.xml  netlify.toml
@@ -35,12 +36,23 @@ To change it later, run once from the repo root:
 All JS strings are in `I18N` at the top of `js/main.js`, keyed by `<html lang>` (fr/en/nl are already filled). Translators only translate the HTML + that object. Mailto field labels are read from the `<label>`s, so they follow the HTML automatically.
 
 ## Class / hook conventions
-- Lowercase-hyphen classes, component-prefixed: `.plan-card`, `.plan-name`, `.faq-item`, `.calc-result`. Layout: `.container`, `.section`, `.section-alt`, `.section-tight`, `.grid .grid-2|3|4`, `.card`. Buttons: `.btn .btn-primary|btn-ghost|btn-light`, `.btn-lg`, `.btn-block`.
+- Lowercase-hyphen classes, component-prefixed: `.plan-card`, `.plan-name`, `.faq-item`, `.calc-result`. Layout: `.container`, `.section`, `.section-tight`, `.section-end`, `.grid .grid-2|3|4`. Fields: `.field-stone`, `.field-folder` (whole-section ground). Buttons: `.btn .btn-primary|btn-ghost|btn-ink`, `.btn-lg`, `.btn-block`. Section names: `.section-label` (never above a heading: left margin on desktop, under the heading on mobile).
 - States: `.is-visible`, `.is-highlighted`, `.is-scrolled`, `body.nav-open`, `html.js`.
 - Scroll animation: add `.reveal` (+ optional `.reveal-d1..d3` delay). Disabled under prefers-reduced-motion.
 - JS hooks are `data-*` attributes only (`data-nav-toggle`, `data-nav`, `data-header`, `data-calc*`, `data-plan-picker`, `data-plan`, `data-contact-form`, `data-mail-field`, `data-form-status`, `data-year`). Keep them when translating.
 - Colors are CSS custom properties in `:root` (light) and the dark `prefers-color-scheme` block. Do not hard-code colors.
-- Never put `backdrop-filter`/`transform`/`filter` on `.site-header` or `.site-nav` (it breaks the fixed mobile menu; the blur lives on `.site-header::before`).
+- Never put `backdrop-filter`/`transform`/`filter` on `.site-header` or `.site-nav` (it breaks the fixed mobile menu; the header ground lives on `.site-header::before` and is opaque, no blur).
+- z-index contract: chatbot 90 < mobile menu 99 < header 100; `body.nav-open` hides the chat.
+
+## Design direction ("Paper and bluestone")
+Idea: the paperwork a self-employed person hands over (the day's slip of checked tasks, the ledger of services, the Peppol deadline, the monthly folder for the accountant), each line checked by a person, set as printed objects on a paper-and-Belgian-bluestone page. Calm, typographic, no stock imagery, no startup gloss. One live thing: the calculator, whose result is a printed note.
+- **Hero:** two fields. Line one of the h1 ("we") stands on paper, line two ("you") on the bluestone field; the seam is the brand promise. The day's slip (`.slip`, aria-hidden) sits on the stone field.
+- **Palette tokens** (`:root`, dark values in the `prefers-color-scheme: dark` block): `--paper` ground, `--paper-2` one tone step, `--sheet`, `--ink`, `--ink-soft` (secondary notes only; running text is full ink), `--stone`/`--on-stone`/`--on-stone-soft`/`--stone-2` (bluestone field), `--folder`/`--on-folder`/`--on-folder-soft` (the accountant's folder), `--teal`/`--teal-strong`/`--teal-soft` (brand accent: actions and the "validated" tick only), `--teal-on-dark` (accent on stone), `--print-*` (printed objects stay paper in both schemes). Components only read the role tokens `--bg --surface --text --muted --border --brand --brand-strong --brand-soft --on-brand --focus`; `.field-*`, plan cards and printed objects re-map them. Contrast checked AA in light and dark.
+- **Type:** Schibsted Grotesk only (self-hosted, OFL). Five steps: `--step-small` 15px, `--step-body` 17→19, `--step-lead` 20→24, `--step-head` 28→52, `--step-display` 36→88 (h1, prices, figures). Display weight 800, tracking −0.04em, leading ~1. Two oversized figures are deliberate: the Peppol date and the footer name.
+- **Space & frame:** 8px scale `--space-1..10`; sections `--section` (72→152px); gutter 16→48px; container 1280px; 12-column grid from 960px, section labels in columns 1–3, headings from column 4.
+- **Components:** buttons flat, near-square (`--radius` 4px), 48/56px tall; no shadows at rest (only sticky header, chat, menu); no hairlines except real tables, form fields and the rules of the printed slip/ledger (`data-ui`); no eyebrows, no gradients, no icon cards. Plans are tiles that step up in height and tone (paper-2 → folder → stone).
+- **Motion:** minimal and token-based (`--ease-out`, `--ease-in-out`, `--dur-1..4`); `.reveal` is the only scroll effect. Reduced motion keeps colour/opacity changes and drops travel. The motion layer can build on these tokens.
+- **Photographs (to supply):** none are used. The founders should provide square portraits of Maurice Pinnoy, Flavio Immoridino and Alexandre Chartz (≥ 600×600, natural light, same background) to replace the monogram tiles in `.avatar`; optionally one or two real working photos (a client's workshop or practice, with written consent) for the services or team section.
 
 ## Adding a page
 Copy an existing page at the same depth (keeps header/footer/paths right), change title, description, canonical, hreflang, the `aria-current="page"` nav item and the lang-switch hrefs, add it in fr/en/nl, and add its 3 URLs to sitemap.xml.
