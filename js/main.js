@@ -200,8 +200,9 @@
       out('[data-calc-plan-label]').textContent = fill(t.planBar, { plan: planName });
 
       var max = Math.max(cost, price) || 1;
-      out('[data-calc-bar-cost]').style.width = Math.max(2, (cost / max) * 100) + '%';
-      out('[data-calc-bar-plan]').style.width = Math.max(2, (price / max) * 100) + '%';
+      // scaleX instead of width: the bar update stays on the compositor
+      out('[data-calc-bar-cost]').style.transform = 'scaleX(' + Math.max(0.02, cost / max) + ')';
+      out('[data-calc-bar-plan]').style.transform = 'scaleX(' + Math.max(0.02, price / max) + ')';
 
       var vars = { cost: money.format(cost), plan: planName, price: money.format(price), hours: num.format(monthHours) };
       out('[data-calc-suggestion]').textContent = fill(cost > price ? t.calcMore : t.calcLess, vars);
