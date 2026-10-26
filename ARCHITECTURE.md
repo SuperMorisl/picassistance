@@ -14,7 +14,8 @@ en/  nl/                      same filenames: en/index.html, en/pages/tarifs.htm
 css/style.css                 shared, all languages (design tokens at the top)
 fonts/                        Schibsted Grotesk variable woff2 (400–800, Latin subset, 41 KB) + OFL-SchibstedGrotesk.txt
 js/main.js                    shared, all languages (I18N object at the top)
-chatbot/chatbot.css|js        stubs: chatbot agent
+chatbot/chatbot.css|js        client-side FAQ bot + teaser bubble (see "Chat launcher, teaser, cookies")
+cookies/cookies.css|js        GDPR consent banner + preferences (window.picCookies)
 favicon.svg  robots.txt  sitemap.xml  netlify.toml
 ```
 
@@ -42,7 +43,7 @@ All JS strings are in `I18N` at the top of `js/main.js`, keyed by `<html lang>` 
 - JS hooks are `data-*` attributes only (`data-nav-toggle`, `data-nav`, `data-header`, `data-calc*`, `data-plan-picker`, `data-plan`, `data-contact-form`, `data-mail-field`, `data-form-status`, `data-year`). Keep them when translating.
 - Colors are CSS custom properties in `:root` (light) and the dark `prefers-color-scheme` block. Do not hard-code colors.
 - Never put `backdrop-filter`/`transform`/`filter` on `.site-header` or `.site-nav` (it breaks the fixed mobile menu; the header ground lives on `.site-header::before` and is opaque, no blur).
-- z-index contract: chatbot 90 < mobile menu 99 < header 100; `body.nav-open` hides the chat.
+- z-index contract: chatbot 90 < cookie banner 95 < mobile menu 99 < header 100; `body.nav-open` hides the chat and the cookie banner.
 
 ## Design direction ("Paper and bluestone")
 Idea: the paperwork a self-employed person hands over (the day's slip of checked tasks, the ledger of services, the Peppol deadline, the monthly folder for the accountant), each line checked by a person, set as printed objects on a paper-and-Belgian-bluestone page. Calm, typographic, no stock imagery, no startup gloss. One live thing: the calculator, whose result is a printed note.
@@ -53,6 +54,11 @@ Idea: the paperwork a self-employed person hands over (the day's slip of checked
 - **Components:** buttons flat, near-square (`--radius` 4px), 48/56px tall; no shadows at rest (only sticky header, chat, menu); no hairlines except real tables, form fields and the rules of the printed slip/ledger (`data-ui`); no eyebrows, no gradients, no icon cards. Plans are tiles that step up in height and tone (paper-2 → folder → stone).
 - **Motion:** minimal and token-based (`--ease-out`, `--ease-in-out`, `--dur-1..4`); `.reveal` is the only scroll effect. Reduced motion keeps colour/opacity changes and drops travel. The motion layer can build on these tokens.
 - **Photographs (to supply):** none are used. The founders should provide square portraits of Maurice Pinnoy, Flavio Immoridino and Alexandre Chartz (≥ 600×600, natural light, same background) to replace the monogram tiles in `.avatar`; optionally one or two real working photos (a client's workshop or practice, with written consent) for the services or team section.
+
+## Chat launcher, teaser, cookies
+- **Launcher** sits at `bottom: 76px` (70px under 560px), right 16px, to clear the Netlify badge in the bottom-right corner. The desktop panel opens 12px above it (height `min(580px, 100dvh - header - 170px)`); under 560px the panel is full screen below the header.
+- **Teaser** (`.pic-chat-teaser`, in chatbot.js): a bubble above the launcher ~5 s after load, at most once per session (`sessionStorage["pic-chat-teaser"]`, falls back to once per page load). Waits while `html.pic-cookie-open` (banner visible) or the menu is open; goes away for good on ×, Escape, chat open or menu open. Never takes focus. Strings `teaser` / `teaserClose` in the chatbot `UI` object.
+- **Cookies** (`cookies/`, prefix `pic-cookie`, adapted from Pinnoydesign): banner bottom-left (corner right stays free), z-index 95, no focus steal on first load, focus trap only in the preferences view. Categories: necessary (always on) + `analytics` (placeholder, off by default, no tool installed). Choice in `localStorage["pic-cookie-consent"]` for 6 months with `v: VERSION`; bump `VERSION` (and update texts + privacy pages) when a real analytics tool is added. API: `window.picCookies.has('analytics')`, `.get()`, `.open()`, event `pic-consent-change`, or `<script type="text/plain" data-pic-cookie="analytics" data-src="...">`. Any `[data-pic-cookie-open]` element reopens the preferences: every footer has a `button.pic-cookie-manage` after the privacy link ("Gérer les cookies" / "Manage cookies" / "Cookies beheren"). Include `R + cookies/cookies.css` and `R + cookies/cookies.js` (defer) on new pages. Privacy pages document both storage keys in `#cookies`.
 
 ## Adding a page
 Copy an existing page at the same depth (keeps header/footer/paths right), change title, description, canonical, hreflang, the `aria-current="page"` nav item and the lang-switch hrefs, add it in fr/en/nl, and add its 3 URLs to sitemap.xml.
@@ -65,5 +71,5 @@ Use only the facts already on the FR pages: prices, offers, Peppol, legal limits
 
 ## Remaining work
 - **EN + NL translation agent:** create `en/` and `nl/` copies of index.html, pages/tarifs.html and pages/contact.html (+ placeholder mentions-legales.html and confidentialite.html **only if they don't exist yet**; never overwrite them). Fix paths with the rules above and translate everything, including aria-labels, the `<head>` and the skip link.
-- **Legal agent:** owns `pages/mentions-legales.html` and `pages/confidentialite.html` in fr/en/nl (replace the "Contenu en cours" placeholder; use the `.prose` container). Facts: Pinnoydesign, sole proprietorship of Maurice Pinnoy, Namur, BCE BE 1043.052.381, TVA non applicable (franchise regime), contact.picassistance@gmail.com, hosting Netlify, form via Formspree (or mailto), no cookies or analytics set by the site (the chatbot agent must say if it adds any).
+- **Legal agent:** owns `pages/mentions-legales.html` and `pages/confidentialite.html` in fr/en/nl (replace the "Contenu en cours" placeholder; use the `.prose` container). Facts: Pinnoydesign, sole proprietorship of Maurice Pinnoy, Namur, BCE BE 1043.052.381, TVA non applicable (franchise regime), contact.picassistance@gmail.com, hosting Netlify, form via Formspree (or mailto), no cookies or analytics set by the site; only the two strictly necessary storage keys listed above.
 - **Chatbot agent:** owns `chatbot/` (chatbot.css + chatbot.js are already linked on every page, with `defer`). Read the language from `document.documentElement.lang`; use the CSS custom properties from style.css; keep z-index below 99 (mobile menu 99, header 100) or hide the bot when `body.nav-open`; respect prefers-reduced-motion; no external libraries.

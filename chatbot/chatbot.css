@@ -8,7 +8,8 @@
   --pic-chat-dot: var(--brand);
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
-  bottom: max(16px, env(safe-area-inset-bottom));
+  /* Lifted to clear the Netlify badge in the bottom-right corner (~60px tall) */
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   font-family: var(--font);
   font-size: 1rem;
@@ -54,8 +55,9 @@
   position: absolute; right: 0; bottom: calc(56px + 12px);
   display: flex; flex-direction: column;
   width: min(380px, calc(100vw - 32px));
-  height: min(580px, calc(100vh - var(--header-h) - 110px));
-  height: min(580px, calc(100dvh - var(--header-h) - 110px));
+  /* 170px = launcher offset 76 + launcher 56 + gap 12 + 26 breathing room under the header */
+  height: min(580px, calc(100vh - var(--header-h) - 170px));
+  height: min(580px, calc(100dvh - var(--header-h) - 170px));
   margin: 0; padding: 0;
   background: var(--surface);
   /* taste-skill-ignore: floating panel edge */ border: 1px solid var(--border);
@@ -98,6 +100,48 @@
 }
 .pic-chat-close:hover { background: rgba(255, 255, 255, 0.16); }
 .pic-chat-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
+
+/* ---------- Teaser bubble (above the launcher, once per session) ---------- */
+.pic-chat-teaser {
+  position: absolute; right: 0; bottom: calc(56px + 12px);
+  display: flex; align-items: flex-start;
+  width: max-content;
+  max-width: min(272px, calc(100vw - 32px));
+  background: var(--sheet, var(--surface)); color: var(--text);
+  /* taste-skill-ignore: floating bubble edge */ border: 1px solid var(--border);
+  border-radius: var(--radius);
+  /* taste-skill-ignore: floating bubble */ box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(6px);
+  transform-origin: bottom right;
+  transition: opacity var(--dur-2, 200ms) var(--ease), transform var(--dur-2, 200ms) var(--ease);
+}
+.pic-chat-teaser.is-visible { opacity: 1; transform: none; }
+.pic-chat-teaser.is-leaving { transition-duration: var(--dur-1, 120ms); }
+/* Small tail pointing at the launcher's centre */
+.pic-chat-teaser::after {
+  content: ""; position: absolute; right: 22px; bottom: -6px;
+  width: 10px; height: 10px;
+  background: inherit;
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+.pic-chat-teaser-open {
+  flex: 1; min-width: 0;
+  margin: 0; padding: 12px 4px 12px 14px;
+  border: 0; border-radius: var(--radius); background: transparent; color: inherit;
+  font: inherit; font-size: 0.94rem; font-weight: 650; line-height: 1.35; text-align: left;
+  cursor: pointer;
+}
+.pic-chat-teaser-open:hover { color: var(--brand-strong); }
+.pic-chat-teaser-open:focus-visible, .pic-chat-teaser-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.pic-chat-teaser-close {
+  display: grid; place-items: center; flex: none;
+  width: 32px; height: 32px; padding: 9px; margin: 6px 6px 0 0;
+  border: 0; border-radius: var(--radius); background: transparent; color: var(--muted); cursor: pointer;
+  transition: background-color var(--dur-1, 120ms) var(--ease), color var(--dur-1, 120ms) var(--ease);
+}
+.pic-chat-teaser-close:hover { background: var(--surface); color: var(--text); }
+.pic-chat-is-open .pic-chat-teaser { display: none; }
 
 /* ---------- Messages ---------- */
 .pic-chat-log {
@@ -213,6 +257,7 @@
 
 /* ---------- Small screens: full screen below the header ---------- */
 @media (max-width: 559.98px) {
+  .pic-chat { bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
   .pic-chat-panel {
     position: fixed; inset: var(--header-h) 0 0 0;
     width: auto; height: auto;
@@ -233,4 +278,5 @@
   .pic-chat .pic-chat-launcher .pic-chat-ico-open, .pic-chat .pic-chat-launcher .pic-chat-ico-close { transform: none; }
   @starting-style { .pic-chat-panel { transform: none; } }
   .pic-chat-launcher:active, .pic-chat-chip:active, .pic-chat-send:active, .pic-chat-close:active { transform: none; }
+  .pic-chat-teaser { transform: none; } /* fade only */
 }

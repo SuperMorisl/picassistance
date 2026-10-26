@@ -1,7 +1,8 @@
 /* =========================================================================
    PIC Assistance: FAQ chatbot (client-side only)
-   - No API, no server call, no cookie, no storage: messages live only in
-     the page and disappear on reload.
+   - No API, no server call, no cookie: messages live only in the page and
+     disappear on reload. The only storage is a sessionStorage flag
+     ("pic-chat-teaser") so the teaser bubble shows once per visit.
    - Answers in the page language (<html lang> fr|en|nl, else URL, else fr).
    - User text is only ever inserted with textContent.
    - Test hook: window.picChat.match(text) -> intent id.
@@ -44,21 +45,24 @@
       title: 'Assistant PIC', sub: 'Réponses automatiques aux questions fréquentes',
       placeholder: 'Posez votre question…', input: 'Votre question', send: 'Envoyer',
       note: 'Assistant automatique. Vos messages restent dans votre navigateur et ne sont pas enregistrés.',
-      typing: 'L’assistant écrit…', you: 'Vous', bot: 'Assistant', suggestions: 'Suggestions'
+      typing: 'L’assistant écrit…', you: 'Vous', bot: 'Assistant', suggestions: 'Suggestions',
+      teaser: 'Une question ? Je vous réponds en direct.', teaserClose: 'Masquer ce message'
     },
     en: {
       open: 'Open the PIC Assistance assistant', close: 'Close the assistant',
       title: 'PIC Assistant', sub: 'Automatic answers to frequent questions',
       placeholder: 'Ask your question…', input: 'Your question', send: 'Send',
       note: 'Automatic assistant. Your messages stay in your browser and are not stored.',
-      typing: 'The assistant is typing…', you: 'You', bot: 'Assistant', suggestions: 'Suggestions'
+      typing: 'The assistant is typing…', you: 'You', bot: 'Assistant', suggestions: 'Suggestions',
+      teaser: 'Got a question? Ask me here.', teaserClose: 'Dismiss this message'
     },
     nl: {
       open: 'De PIC Assistance-assistent openen', close: 'De assistent sluiten',
       title: 'PIC-assistent', sub: 'Automatische antwoorden op veelgestelde vragen',
       placeholder: 'Stel uw vraag…', input: 'Uw vraag', send: 'Versturen',
       note: 'Automatische assistent. Uw berichten blijven in uw browser en worden niet bewaard.',
-      typing: 'De assistent typt…', you: 'U', bot: 'Assistent', suggestions: 'Suggesties'
+      typing: 'De assistent typt…', you: 'U', bot: 'Assistent', suggestions: 'Suggesties',
+      teaser: 'Een vraag? Stel ze hier.', teaserClose: 'Dit bericht verbergen'
     }
   };
 
@@ -603,6 +607,7 @@
   function isOpen() { return !els.panel.hidden; }
 
   function open() {
+    teaserDone();
     els.panel.hidden = false;
     els.root.classList.add('pic-chat-is-open');
     els.launcher.setAttribute('aria-expanded', 'true');
@@ -707,12 +712,104 @@
     root.addEventListener('keydown', function (e) {
       if ((e.key === 'Escape' || e.key === 'Esc') && isOpen()) { e.preventDefault(); close(); }
     });
-    // Close quietly if the mobile menu opens
+    // Close quietly if the mobile menu opens (the teaser goes away for good)
     if (window.MutationObserver) {
       new MutationObserver(function () {
-        if (document.body.classList.contains('nav-open') && isOpen()) close(false);
+        if (!document.body.classList.contains('nav-open')) return;
+        if (isOpen()) close(false);
+        teaserDone();
       }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     }
+    initTeaser();
+  }
+
+  /* ---------- Teaser bubble ----------
+     Pops above the launcher ~5 s after load, at most once per browser session
+     (sessionStorage; if storage fails, once per page load). Waits while the
+     cookie banner (html.pic-cookie-open) or the mobile menu is open. Never
+     takes focus. Gone for good once dismissed, or when the chat or menu opens. */
+  var TEASER_KEY = 'pic-chat-teaser';
+  var TEASER_DELAY = 5000;      // after load
+  var TEASER_AFTER_BANNER = 1500; // after the cookie choice, if the delay has passed
+  var teaser = null, teaserState = 'idle', teaserTimer = 0;
+
+  function teaserSeen() {
+    try { return window.sessionStorage.getItem(TEASER_KEY) === '1'; } catch (e) { return false; }
+  }
+  function markTeaserSeen() {
+    try { window.sessionStorage.setItem(TEASER_KEY, '1'); } catch (e) { /* once per page load */ }
+  }
+  function teaserBlocked() {
+    return document.documentElement.classList.contains('pic-cookie-open') ||
+      document.body.classList.contains('nav-open') || isOpen();
+  }
+
+  function initTeaser() {
+    if (teaserSeen()) { teaserState = 'done'; return; }
+    teaserState = 'waiting';
+    teaserTimer = setTimeout(function () { teaserState = 'ready'; tryTeaser(); }, TEASER_DELAY);
+    // Re-check when the cookie banner closes
+    if (window.MutationObserver) {
+      new MutationObserver(function () {
+        if (document.documentElement.classList.contains('pic-cookie-open')) { hideTeaser(true); return; }
+        if (teaserState === 'ready') {
+          clearTimeout(teaserTimer);
+          teaserTimer = setTimeout(tryTeaser, TEASER_AFTER_BANNER);
+        }
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
+    document.addEventListener('pic-consent-change', function () {
+      if (teaserState === 'ready') { clearTimeout(teaserTimer); teaserTimer = setTimeout(tryTeaser, TEASER_AFTER_BANNER); }
+    });
+  }
+
+  function tryTeaser() {
+    if (teaserState !== 'ready' || teaserBlocked()) return;
+    showTeaser();
+  }
+
+  function showTeaser() {
+    teaserState = 'shown';
+    markTeaserSeen();
+    teaser = el('div', 'pic-chat-teaser');
+    var openBtn = el('button', 'pic-chat-teaser-open', ui.teaser);
+    openBtn.type = 'button';
+    openBtn.setAttribute('aria-controls', 'pic-chat-panel');
+    var x = el('button', 'pic-chat-teaser-close');
+    x.type = 'button';
+    x.setAttribute('aria-label', ui.teaserClose);
+    x.innerHTML = ICON_CLOSE;
+    teaser.appendChild(openBtn); teaser.appendChild(x);
+    openBtn.addEventListener('click', function () { open(); });
+    x.addEventListener('click', function () {
+      var hadFocus = teaser && teaser.contains(document.activeElement);
+      teaserDone();
+      if (hadFocus) els.launcher.focus();
+    });
+    teaser.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); teaserDone(); els.launcher.focus(); }
+    });
+    // Before the launcher in the DOM: Tab reaches the bubble, then the launcher
+    els.root.insertBefore(teaser, els.launcher);
+    teaser.getBoundingClientRect(); // commit the start state so the fade runs
+    teaser.classList.add('is-visible');
+  }
+
+  // Hide the bubble; "temporary" keeps it eligible (only used before it was shown)
+  function hideTeaser(temporary) {
+    if (!teaser) return;
+    var node = teaser;
+    teaser = null;
+    node.classList.add('is-leaving');
+    node.classList.remove('is-visible');
+    setTimeout(function () { if (node.parentNode) node.parentNode.removeChild(node); }, reduceMotion ? 0 : 200);
+    if (!temporary) teaserState = 'done';
+  }
+
+  function teaserDone() {
+    clearTimeout(teaserTimer);
+    if (teaser) hideTeaser(false);
+    teaserState = 'done';
   }
 
   window.picChat = {
